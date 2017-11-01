@@ -1,0 +1,29 @@
+period=[1:1:31];
+age=[157;158;170;171;172;173;181;170;171;265;267;269;242;202;204;205;206;207;208;209;210;229;230;231;232;233;234;235;236;237;239];
+%m=mean(age(:));
+%sd=std(age(:));
+%age=age-m;
+%age=age/sd;
+cce=cell(1,31);
+segment=age';
+%segment=[1,2,3,4,50];
+idx=1:31;
+i=1;
+S1=[],S2=[];
+[S1,id1,S2,id2]=findSegment(segment,idx);
+S1
+id1
+S2
+id2
+cce{1}=S1;
+[r,c]=size(S2);
+while(c>1)
+    i=i+1;
+    [S1,id1,S2,id2]=findSegment(S2,id2);
+    cce{i}=S1;
+    [r,c]=size(S2);
+end
+if(c==1)
+    i=i+1;
+    cce{i}=S2;
+end

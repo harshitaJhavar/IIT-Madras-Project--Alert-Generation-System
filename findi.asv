@@ -1,0 +1,19 @@
+function [ i ] = findi( interval,period,age )
+%UNTITLED2 Summary of this function goes here
+%   Detailed explanation goes here
+min=100;
+interval
+for k=1:numel(interval)-2
+    %% check which pair is minimal
+    p=interval(k);
+    q=interval(k+1);
+    r=interval(k+2);
+    agebyInterpolation=interp1(period([p,r]),age([p,r]),q);
+    
+    error=sqrt(sum((age(q)-agebyInterpolation).^2)/numel(age(q)));
+    if min>error
+        min=error;
+        i=k;
+    end
+end
+
